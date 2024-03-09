@@ -1,0 +1,34 @@
+ @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+ body {
+     background-color: #eae7e7;
+ }
+
+ * {
+     margin: 0px;
+     padding: 0px;
+     box-sizing: border-box;
+     font-family: 'Poppins', sans-serif;
+ }
+
+ .icons {
+     color: #bdd543;
+     font-size: 25px;
+ }
+
+ .form-subida {
+     background: #fff;
+     border-radius: 5px;
+     box-shadow: 0 0 15px #000;
+ }
+
+ .btn-crea {
+    border: none;
+    
+}
+
+.btn-crea:hover {
+    background: #bdd543;
+    font-weight: bold;
+
+}
