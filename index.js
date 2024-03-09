@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             method: 'POST',
             headers: headers,
             params: params,
-            referrerPolicy: 'no-referrer',
+            referrerPolicy: 'origin-when-cross-origin',
         }
 
         console.log(config);
