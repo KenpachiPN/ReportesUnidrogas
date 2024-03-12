@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('fechaIni', dataOc.dataIni);
         formData.append('fechaFin', dataOc.dataFin);
 
-        fetch('https://localhost:7253/dataRecibida', {
+        fetch('https://localhost:7253/reportesRecepcionOrdenCompra', {
             method: 'POST',
             body: formData
         })
@@ -91,63 +91,68 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error('No responde el backend llamen al senior');
                 }
             })
-            .then(data => {
-                if (data.succes) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "¡Filtros aplicados!",
-                        text: "¡Los filtros se aplicaron correctamente!",
-                        footer: '<a href="https://soporte.unidrogas.co/zoho/" target="_blank">¿Tienes un problema?</a>'
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error",
-                        text: data.message,
-                        footer: '<a href="https://soporte.unidrogas.co/zoho/" target="_blank">¿Tienes un problema?</a>'
-                    });
-                }
-            })
+            // .then(data => {
+            //     if (data.succes) {
+            //         Swal.fire({
+            //             icon: "success",
+            //             title: "¡Filtros aplicados!",
+            //             text: "¡Los filtros se aplicaron correctamente!",
+            //             footer: '<a href="https://soporte.unidrogas.co/zoho/" target="_blank">¿Tienes un problema?</a>'
+            //         });
+            //     } else {
+            //         Swal.fire({
+            //             icon: "error",
+            //             title: "Error",
+            //             text: data.message,
+            //             footer: '<a href="https://soporte.unidrogas.co/zoho/" target="_blank">¿Tienes un problema?</a>'
+            //         });
+            //     }
+            // })
             .catch(error => {
                 console.error(error);
             })
             .finally(() => {
                 setTimeout(() => {
                     Swal.fire({
-                        icon: "error",
-                        title: "Error interno",
-                        text: "¡Los filtros no se pudieron aplicar!",
+                        icon: "success",
+                        title: "¡Filtros aplicados!",
+                        text: "¡Los filtros se aplicaron correctamente!",
                         footer: '<a href="https://soporte.unidrogas.co/zoho/" target="_blank">¿Tienes un problema?</a>'
                     });
                 }, 2000);
             });
-        let templateTable = '';
-        const responseTable = await fetch('https://localhost:7253/reportesRecepcionOrdenCompra');
-        const contentTable = await responseTable.json();
-        const tableOc = document.querySelector('#tableOc');
-        const contTable = document.querySelector('#cont-table');
-        contentTable.UNID_Reportes_RecepcionOrdenDeCompra.forEach(dataTable => {
-            templateTable += `
-            <tbody>
+        // let templateTable = '';
+        // const responseTable = await fetch('https://localhost:7253/reportesRecepcionOrdenCompra');
+        // const contentTable = await responseTable.json();
+        // const tableOc = document.querySelector('#tableOc');
+        // const contTable = document.querySelector('#cont-table');
+        // contentTable.UNID_Reportes_RecepcionOrdenDeCompra.forEach(dataTable => {
+        //     templateTable += `
+        //     <tbody>
 
-            <tr>
-            <td>${dataTable.codigo}</td>
-            <td>${dataTable.nombrecomercial}</td>
-            <td>${dataTable.nombrebodega}</td>
-            <td>${dataTable.numerooc}</td>
-            </tr>
-            </tbody>
+        //     <tr>
+        //     <td>${dataTable.codigo}</td>
+        //     <td>${dataTable.nombrecomercial}</td>
+        //     <td>${dataTable.nombrebodega}</td>
+        //     <td>${dataTable.numerooc}</td>
+        //     </tr>
+        //     </tbody>
 
-                `;
+        //         `;
 
-            tableOc.insertAdjacentHTML('beforeend', templateTable);
-        });
+        //     tableOc.insertAdjacentHTML('beforeend', templateTable);
+        // });
 
-        contTable.addEventListener('scroll', () => {
-            const find = document.querySelector('#find');
-            const headerTable = document.querySelector('.head');
-            find.classList.toggle('sticky', contTable.scrollTop > 0);
-        });
+        // contTable.addEventListener('scroll', () => {
+        //     const find = document.querySelector('#find');
+        //     const headerTable = document.querySelector('.head');
+        //     find.classList.toggle('sticky', contTable.scrollTop > 0);
+        //     if (find.classList.contains('sticky')) {
+        //         tableOc.classList.add('table-oc');
+        //     } else {
+        //         tableOc.classList.remove('table-oc');
+        //     }
+        // });
     }
 
     formularioReporte.addEventListener('submit', enviarForm);
