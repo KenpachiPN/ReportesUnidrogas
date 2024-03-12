@@ -34,6 +34,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     dataLabs();
 
+    const dataTableOc = async () => {
+        let templateTable = '';
+        const responseTable = await fetch('https://localhost:7253/reportesRecepcionOrdenCompra');
+        const contentTable = await responseTable.json();
+        const tableOc = document.querySelector('#tableOc');
+        contentTable.UNID_Reportes_RecepcionOrdenDeCompra.forEach(dataTable => {
+            templateTable += `
+                    <tbody>
+        
+                    <tr>
+                    <td>${dataTable.codigo}</td>
+                    <td>${dataTable.nombrecomercial}</td>
+                    <td>${dataTable.nombrebodega}</td>
+                    <td>${dataTable.numerooc}</td>
+                    </tr>
+                    </tbody>
+        
+                        `;
+
+            tableOc.insertAdjacentHTML('beforeend', templateTable);
+        });
+    };
+
     const enviarForm = async e => {
         e.preventDefault();
         const bodegasUni = document.querySelector('#bodegasUni').value;
@@ -75,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('fechaIni', dataOc.dataIni);
         formData.append('fechaFin', dataOc.dataFin);
 
-        fetch('https://localhost:7253/reportesRecepcionOrdenCompra', {
+        fetch('https://localhost:7253/reciboBody', {
             method: 'POST',
             body: formData
         })
@@ -119,29 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         text: "¡Los filtros se aplicaron correctamente!",
                         footer: '<a href="https://soporte.unidrogas.co/zoho/" target="_blank">¿Tienes un problema?</a>'
                     });
-                }, 2000);
+                    dataTableOc();
+                }, 5000);
             });
-        // let templateTable = '';
-        // const responseTable = await fetch('https://localhost:7253/reportesRecepcionOrdenCompra');
-        // const contentTable = await responseTable.json();
-        // const tableOc = document.querySelector('#tableOc');
-        // const contTable = document.querySelector('#cont-table');
-        // contentTable.UNID_Reportes_RecepcionOrdenDeCompra.forEach(dataTable => {
-        //     templateTable += `
-        //     <tbody>
-
-        //     <tr>
-        //     <td>${dataTable.codigo}</td>
-        //     <td>${dataTable.nombrecomercial}</td>
-        //     <td>${dataTable.nombrebodega}</td>
-        //     <td>${dataTable.numerooc}</td>
-        //     </tr>
-        //     </tbody>
-
-        //         `;
-
-        //     tableOc.insertAdjacentHTML('beforeend', templateTable);
-        // });
 
         // contTable.addEventListener('scroll', () => {
         //     const find = document.querySelector('#find');
@@ -154,6 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
         //     }
         // });
     }
+
+
 
     formularioReporte.addEventListener('submit', enviarForm);
 
