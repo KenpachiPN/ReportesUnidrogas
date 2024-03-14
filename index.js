@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const dataTableOc = async () => {
         let templateTable = '';
-        const responseTable = await fetch('https://localhost:7253/reportesRecepcionOrdenCompra');
+        const responseTable = await fetch('https://spradadev.me:5000/reportesRecepcionOrdenCompra');
         const contentTable = await responseTable.json();
         const tableOc = document.querySelector('#tableOc');
         contentTable.UNID_Reportes_RecepcionOrdenDeCompra.forEach(dataTable => {
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('fechaIni', dataOc.dataIni);
         formData.append('fechaFin', dataOc.dataFin);
 
-        fetch('https://localhost:7253/reciboBody', {
+        fetch('https://spradadev.me:5000/reciboBody', {
             method: 'POST',
             body: formData
         })
